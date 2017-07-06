@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Logicless</title>
+	<script src="phaser.min.js"></script>
+    <style>
+        body 
+        {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+window.onload = function() 
+{
+
+/* base code here was only for the template given in Phaser directory */
+	var game = new Phaser.Game("100%", "100%", Phaser.CANVAS, 'Logicless',
+	{
+		preload: preload, 
+		create: create
+	});
+
+	function preload()
+	{
+		game.load.image('RedCircle', 'res/red_circle.png');
+		game.load.image('BlueRectangle', 'res/blue_rectangle.png');
+		game.load.image('PurpleTriangle', 'res/purple_triangle.png');
+		game.load.image('YellowRectangle', 'res/yellow_rectangle.png');
+		game.load.image('CyanTriangle', 'res/cyan_triangle.png');
+		game.load.image('GreenCircle', 'res/green_circle.png');
+	}
+
+	function create() 
+	{
+		var circle_red = game.add.sprite(game.world.centerX, game.world.centerY, 'RedCircle');
+		var rectangle_blue= game.add.sprite(game.world.centerX, game.world.centerY, 'BlueRectangle');
+		var triangle_purple = game.add.sprite(game.world.centerX, game.world.centerY, 'PurpleTriangle');
+		var triangle_cyan = game.add.sprite(game.world.centerX, game.world.centerY, 'CyanTriangle');
+		var circle_green = game.add.sprite(game.world.centerX, game.world.centerY, 'GreenCircle');
+		var rectangle_yellow = game.add.sprite(game.world.centerX, game.world.centerY, 'YellowRectangle');
+
+		starting_text = game.add.text(550, 16, '', { fill: 'white' });
+		level3_text = game.add.text(665, 16, '', { fill: 'cyan' });
+
+		/* shape coordinates */
+		circle_red.anchor.set(0.5, 0.5);
+		circle_red.inputEnabled = true;
+
+		rectangle_blue.anchor.set(-0.8, -1.2);
+		rectangle_blue.inputEnabled = true;
+
+
+		triangle_purple.anchor.set(2.1);
+		triangle_purple.inputEnabled = true;
+
+		triangle_cyan.anchor.set(1.0);
+		triangle_cyan.inputEnabled = true;
+
+		circle_green.anchor.set(-2.8, 0.5);
+		circle_green.inputEnabled = true;
+
+		rectangle_yellow.anchor.set(0.23, -1.2);
+		rectangle_yellow.inputEnabled = true;
+
+		starting_text.text = "Click the ";
+		level3_text.text = "CYAN (Turquoise) Triangle";
+		yay_text = game.add.text(550, 36, '', { fill: 'green' });
+		oh_text = game.add.text(550, 36, '', { fill: 'red' });
+
+		circle_red.events.onInputDown.add(other_shapes_listener, this);
+		rectangle_blue.events.onInputDown.add(other_shapes_listener, this);
+		triangle_purple.events.onInputDown.add(other_shapes_listener, this);
+		triangle_cyan.events.onInputDown.add(cyan_triangle_listener, this);
+		circle_green.events.onInputDown.add(other_shapes_listener, this);
+		rectangle_yellow.events.onInputDown.add(other_shapes_listener, this);
+	}
+
+/* happy ending :) */
+	function cyan_triangle_listener () 
+	{
+		yay_text.text = "Great Job!";
+		window.location.href = "level4.html";
+	}
+
+/* try again :'( */
+	function other_shapes_listener ()
+	{
+		oh_text.text = "Oh!  Try Again!";
+		window.location.reload(true);
+	}
+};
+</script>
+</body>
+</html>

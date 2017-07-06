@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Logicless</title>
+	<script src="phaser.min.js"></script>
+    <style>
+        body 
+        {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript">
+window.onload = function() 
+{
+
+/* base code here was only for the template given in Phaser directory */
+	var game = new Phaser.Game("100%", "100%", Phaser.CANVAS, 'Logicless',
+	{
+		preload: preload, 
+		create: create
+	});
+
+	function preload()
+	{
+		game.load.image('Title', 'res/title.png');
+	}
+
+	function create() 
+	{
+		var title = game.add.sprite(game.world.centerX, game.world.centerY, 'Title');
+
+		starting_text = game.add.text(300, 400, '', { fill: 'white' });
+		clickme = game.add.text(450, 350, '', { fill: 'white' });
+
+		/* shape coordinates */
+		title.anchor.set(0.5);
+		title.inputEnabled = true;
+
+		starting_text.text = "A Game for MiniLD #60 using a 'minimalistic' theme. ";
+		clickme.text = "Click 'LOGICLESS' to enter";
+
+		title.events.onInputDown.add(menu_listener, this);
+
+/* happy ending :) */
+	function menu_listener () 
+	{
+		window.location.href = "level1.html";
+	}
+}
+};
+</script>
+</body>
+</html>
